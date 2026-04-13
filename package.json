@@ -1,12 +1,7 @@
 {
   "name": "simple-auth-service",
   "version": "1.0.0",
-  "description": "Lab project for authentication service",
-  "main": "src/index.js",
   "scripts": {
     "test": "node src/index.js"
-  },
-  "dependencies": {},
-  "author": "Judy",
-  "license": "ISC"
-} 
+  }
+}
