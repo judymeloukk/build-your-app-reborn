@@ -1,9 +1,9 @@
-const fs = require('fs');
-const path = require('path');
-const dataPath = path.join(__dirname, '../data/users.json');
-const users = JSON.parse(fs.readFileSync(dataPath, 'utf8'));
+// بنستدعي ملف البيانات باستخدام require
+// السهمين والشرطة (../) معناهم "اخرج بره فولدر src وبعدين ادخل فولدر data"
+const users = require("../data/users.json");
 
 function findUser(username) {
+  // بنعمل search جوه ملف الـ JSON اللي قريناه
   return users.find(u => u.username === username);
 }
 
