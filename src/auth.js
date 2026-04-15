@@ -1,27 +1,25 @@
 const { findUser } = require("./users");
 
 function login(username, password) {
-  
-  // Task 1: Ensure inputs are strings and are not empty/whitespace
+  const genericError = "Invalid credentials";
+
+  // Basic validation & Task: Reject if password < 8 characters
   if (
     typeof username !== 'string' || 
     typeof password !== 'string' || 
     username.trim() === "" || 
-    password.trim() === ""
+    password.length < 8
   ) {
-    return { success: false, message: "Invalid credentials" }; // Task 2: Unified message
-  }
-  
-  // Task 3: Ensure password is at least 8 characters
-  if (password.length < 8) {
-    return { success: false, message: "Invalid credentials" }; // Task 2: Unified message
+    logFailure(username);
+    return { success: false, message: genericError };
   }
 
   const user = findUser(username);
   
-  // Task 2: Unified message if user is not found or password doesn't match
+  // Task: Unified message for "not found" or "wrong password"
   if (!user || user.password !== password) {
-    return { success: false, message: "Invalid credentials" };
+    logFailure(username);
+    return { success: false, message: genericError };
   }
 
   return {
@@ -29,6 +27,14 @@ function login(username, password) {
     message: "Login successful",
     role: user.role
   };
+}
+
+// Logging mechanism for failed attempts
+function logFailure(username) {
+  const timestamp = new Date().toISOString();
+  // If username is undefined or empty, log as 'Unknown'
+  const targetUser = username || "Unknown User"; 
+  console.log(`[${timestamp}] FAILED LOGIN ATTEMPT: ${targetUser}`);
 }
 
 module.exports = { login };
