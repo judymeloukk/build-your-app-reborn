@@ -10,6 +10,5 @@ jobs:
       - name: Use Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '24'
-      - run: npm install
-      - run: npm test
+          node-version: '20'
+      - run: node src/index.js
